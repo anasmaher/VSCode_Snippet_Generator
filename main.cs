@@ -4,9 +4,47 @@ using System.Collections.Generic;
 
 class Program
 {
+    static void Main()
+    {
+        // Inputs
+        string inputPath = GetInputPath();
+
+        while (!File.Exists(inputPath))
+        {
+            Console.WriteLine("File not found.");
+            inputPath = GetInputPath();
+        }
+
+        Console.Write("Enter the word/symbol that seperates your blocks of code: ");
+        string seperator = Console.ReadLine();
+        Console.WriteLine();
+
+        // Building snippets
+        List<string> snippets = BuildSnippets(inputPath, seperator);
+
+        // Outputs
+       
+        GenerateOutputFile(ref snippets);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Generated snippets:\n");
+        foreach (string snippet in snippets)
+        {
+            Console.WriteLine(snippet);
+        }
+        
+        WaitForExit();
+        Console.ResetColor();
+    }
+
+    static void WaitForExit()
+    {
+        Console.WriteLine("\nFinished");
+        Console.ReadKey();
+    }
+
     static string GetInputPath()
     {
-        Console.Write("Enter the path of the input text file: ");
+        Console.Write("Enter the path oftext file: ");
         string filePath = Console.ReadLine();
         Console.WriteLine();
 
@@ -36,7 +74,7 @@ class Program
             List<string> formattedLines = new List<string>();
             foreach (string line in block.Split('\n'))
             {
-                string formattedLine = $@"""{line.TrimEnd()}""";
+                string formattedLine = $@"""{line.TrimEnd().Replace("\"", "\\\"")}""";
                 formattedLines.Add(formattedLine);
             }
 
@@ -49,35 +87,24 @@ class Program
 
             snippets.Add(snippet);
         }
-
+        
         return snippets;
     }
 
-    static void Main()
+    static bool YesNoQuestion(string question)
     {
-        // Inputs
-        string inputPath = GetInputPath();
-
-        while (!File.Exists(inputPath))
-        {
-            Console.WriteLine("File not found.");
-            inputPath = GetInputPath();
-        }
-
-        Console.Write("Enter the word/symbol that seperates your blocks of code: ");
-        string seperator = Console.ReadLine();
-        Console.WriteLine();
-
-        // Building snippets
-        List<string> snippets = BuildSnippets(inputPath, seperator);
-
-        // Outputs
-        Console.Write("Do you want your snippets in a text file ?\n");
+        Console.WriteLine(question);
         Console.Write("-Yes\t-No\n");
         var choice = Console.ReadLine().ToLower();
         Console.WriteLine();
 
-        if (choice == "yes")
+        return choice == "yes";
+        
+    }
+
+    static void GenerateOutputFile(ref List<string> snippets)
+    {
+        if (YesNoQuestion("Do you want your snippets in a text file ?"))
         {
             Console.Write("Enter the path of the snippets output file: ");
             string outputPath = Console.ReadLine();
@@ -88,13 +115,5 @@ class Program
             Console.WriteLine("Done.\n");
             Console.ResetColor();
         }
-
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("Generated snippets:\n");
-        foreach (string snippet in snippets)
-        {
-            Console.WriteLine(snippet);
-        }
-        Console.ResetColor();
     }
 }
