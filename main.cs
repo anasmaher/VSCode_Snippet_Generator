@@ -31,20 +31,25 @@ class Program
         {
             Console.WriteLine(snippet);
         }
-        
-        WaitForExit();
         Console.ResetColor();
+
+        WaitForExit();
     }
 
     static void WaitForExit()
     {
-        Console.WriteLine("\nFinished");
-        Console.ReadKey();
+        Console.WriteLine("\nFinished, press Esc to quit.");
+        ConsoleKeyInfo PressedKey = Console.ReadKey();
+
+        while(PressedKey.Key != ConsoleKey.Escape)
+        {
+            PressedKey = Console.ReadKey();
+        }
     }
 
     static string GetInputPath()
     {
-        Console.Write("Enter the path oftext file: ");
+        Console.Write("Enter the path of text file: ");
         string filePath = Console.ReadLine();
         Console.WriteLine();
 
