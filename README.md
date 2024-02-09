@@ -31,3 +31,12 @@ Only download .NET 7.0 SDK x64: https://dotnet.microsoft.com/en-us/download/dotn
 3. run the program.
 
 ## Screenshots
+![image](https://github.com/anasmaher/VSCode_Snippet_Generator/assets/91443394/adb5db7f-2547-438e-a148-19a3311438e6)
+![image](https://github.com/anasmaher/VSCode_Snippet_Generator/assets/91443394/be58940a-efcf-4c6d-b11d-18d403a3357c)
+![image](https://github.com/anasmaher/VSCode_Snippet_Generator/assets/91443394/a6d6fc21-bf56-4832-9f1b-3baf1451a47a)
+![image](https://github.com/anasmaher/VSCode_Snippet_Generator/assets/91443394/ccad9941-3574-4835-be3e-92e4a1f5a3b4)
+![image](https://github.com/anasmaher/VSCode_Snippet_Generator/assets/91443394/a7baa2ce-b8ea-408a-83a6-327894e70a87)
+
+
+
+
